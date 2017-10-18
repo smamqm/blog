@@ -1,14 +1,37 @@
 // app.js
 // create our angular app and inject ngAnimate and ui-router 
 // =============================================================================
-angular.module('formApp', ['ui.router'  ])
+angular.element(document).ready(function() {
+ angular.bootstrap(document, [ 'formApp' ]);});
+var formApp = angular.module('formApp', ['ui.router' ,'mainControllers','articleControllers'  ]);
 
 // configuring our routes 
 // =============================================================================
-.config(function($stateProvider, $urlRouterProvider) {
+formApp.config(function($stateProvider, $urlRouterProvider) {
     
     $stateProvider
     
+    	.state('menu',{
+    		url:'/menu',
+    		templateUrl:'app/menu/menu.html' ,
+    		controller: 'menuController'
+    	})
+    	
+    	.state('main',{
+    		url:'/main',
+    		templateUrl:'app/main/main.html' ,
+    		controller: 'mainController'
+    		
+    	})
+    	
+    	.state('article',{
+    		url:'/article',
+    		templateUrl:'app/article/article.html' ,
+    		controller: 'articleController'
+    		
+    	})
+    	
+    	
         // route to show our basic form (/form)
         .state('form', {
             url: '/form',

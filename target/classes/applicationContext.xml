@@ -26,16 +26,38 @@
         <property name="password" value="aladdin" />
     </bean>
 
+
+	
+
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">  
 	    <property name="dataSource" ref="jdbcDataSource" />  
+	    <property name="mapperLocations" value="classpath:com/blog/mapper/xml/*.xml"/> 
 	    <property name="configLocation" value="classpath:mybatis-config.xml"></property>  
 	    
 	</bean>  
+	
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!-- 扫描包路径，如果需要扫描多个包，中间使用半角逗号隔开 -->
+        <property name="basePackage" value="com.blog.mapper"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+       <!-- <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+       会导致数据源配置不管用，数据库连接不上。
+       且spring 4弃用
+       -->
+    </bean>
+	
+	<!-- 
 	<bean id="UserMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">  
 	    <property name="mapperInterface" value="com.blog.mapper.UserMapper"></property>  
 	    <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>  
 	</bean> 
-	 
+	
+	
+	<bean id="IndexMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">   
+	    <property name="mapperInterface" value="com.blog.mapper.IndexMapper"></property>  
+	    <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>  
+	</bean> 
+	  -->
 	 
 
 </beans>

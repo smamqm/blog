@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.blog.mapper.IndexMapper">
+	<!-- 返回结果对应MAP-->
+	<resultMap type="com.blog.entity.Tag" id="Tag">
+		<result column="tid" property="id" jdbcType="INTEGER" />
+		<result column="tname" property="name" jdbcType="VARCHAR" />
+	</resultMap>
+	<!--查询标签列表 -->
+    <select id="getAllTags" resultMap="Tag" parameterType="List">
+    SELECT * FROM `bjy_tag`
+    	<if test="list != null and list.size>0">
+			where tid in
+			<foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+		        #{item}
+		    </foreach>
+	    </if>
+		
+	</select>
+	
+	<resultMap type="com.blog.entity.Category" id="Category">
+		<result column="cid" property="id" jdbcType="INTEGER"/>
+		<result column="cname" property="name" jdbcType="VARCHAR"/>
+		<result column="keywords" property="keywords" jdbcType="VARCHAR"/>
+		<result column="description" property="description" jdbcType="VARCHAR"/>
+		<result column="sort" property="sort" jdbcType="INTEGER"/>
+		<result column="pid" property="pid" jdbcType="INTEGER"/>
+	</resultMap>
+	
+	<!--查询所有导航-->
+	<select id="getAllCategorys" resultMap="Category" parameterType="List">
+		SELECT * FROM `bjy_category`
+		
+		 
+		<if test="list != null and list.size>0">
+			where cid in
+			<foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+		        #{item}
+		    </foreach>
+	    </if>
+	     order by cid
+	</select>
+	
+	
+	
+	<resultMap type="com.blog.entity.Article" id="Article">
+		<result column="aid"  property="id" jdbcType="VARCHAR" />  
+		<result column="title"  property="title" jdbcType="VARCHAR" />  
+		<result column="author"  property="author" jdbcType="VARCHAR" /> 
+		<result column="content"  property="content" jdbcType="VARCHAR" />
+		<result column="keywords"  property="keywords" jdbcType="VARCHAR" />   
+		<result column="description"  property="description" jdbcType="VARCHAR" />
+		<result column="is_show"  property="isShow" jdbcType="INTEGER" />
+		<result column="is_delete"  property="isDelete" jdbcType="INTEGER" />  
+		<result column="is_top"  property="isTop" jdbcType="INTEGER" /> 
+		<result column="is_original"  property="isOriginal" jdbcType="INTEGER" />
+		<result column="click"  property="click" jdbcType="INTEGER" />  
+		<result column="addtime"  property="addtime" jdbcType="INTEGER" />
+		<result column="cid"  property="cid" jdbcType="INTEGER" />
+	</resultMap>
+	
+	<!--查询所有导航-->
+	<select id="getAllArticles" resultMap="Article">
+		SELECT * FROM `bjy_article` order by aid
+	</select>
+	
+	<select id="getAllArticleTagMaps" parameterType="List" resultType="com.blog.entity.ArticleTagMap">
+		select bat.aid , bt.* from bjy_article_tag bat 
+
+		INNER JOIN bjy_tag bt on bat.tid = bt.tid
+		INNER JOIN bjy_article ba
+		on bat.aid = ba.aid where ba.aid in 
+		
+		<foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+		        #{item}
+		    </foreach>
+	</select>
+	
+</mapper>

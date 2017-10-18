@@ -5,6 +5,7 @@
 	<resultMap type="com.blog.entity.User" id="User">
 		<result column="id" property="id" jdbcType="VARCHAR" />
 		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="value" property="value" jdbcType="VARCHAR" />
 	</resultMap>
 	<!--查询详细列表 -->
     <select id="getUsers" resultMap="User">
@@ -13,7 +14,7 @@
 	
 	<!--插入数据 -->
     <select id="addUser"  parameterType="com.blog.entity.User" >
-		insert into bjy_config (id, name) values(#{id}, #{name})
+		insert into bjy_config (name,value) values( #{name},#{value})
 	</select>
 	
 </mapper>

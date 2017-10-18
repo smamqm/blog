@@ -45,7 +45,8 @@
 <!-- 	<settings>  
 	  <setting name="logImpl" value="LOG4J"/>  
 	</settings>    -->
-    <mappers>  
+    <!-- <mappers>  
         <mapper resource="com/blog/mapper/xml/UserMapper.xml"/>  
-    </mappers>  
+        <mapper resource="com/blog/mapper/xml/IndexMapper.xml"/>  
+    </mappers>   -->
 </configuration>

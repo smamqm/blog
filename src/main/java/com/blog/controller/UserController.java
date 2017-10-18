@@ -23,18 +23,18 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
-	@RequestMapping(value = "/ulogin", method = RequestMethod.GET)
+	@RequestMapping(value = "/home/ulogin", method = RequestMethod.GET)
 	public @ResponseBody List<User> toLogin(HttpServletResponse response) {
 		List<User> us = userService.getAllUsers();
 		return us;
 	}
 	
-	@RequestMapping(value = "/update", method = RequestMethod.GET)
+	@RequestMapping(value = "/home/update", method = RequestMethod.GET)
 	public @ResponseBody List<User> toLogin() {
 		User u = new User();
 		u.setId("1234");
 		u.setName("Name123");
-		//userService.addUser(u);
+		userService.addUser(u);
 		return toLogin(null);
 	}
 	

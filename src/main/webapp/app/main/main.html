@@ -1,0 +1,41 @@
+<div class="col-md-12 content" ng-repeat="a in articles">
+	<h2 class="text-left">
+		<a href="{{a.id}}" >{{a.title}}</a>
+	</h2>
+	<div class="row clearfix">
+		<div class="col-md-3 column">
+			<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+			{{a.author}}
+		</div>
+		<div class="col-md-3 column">
+			<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+			{{a.addtime}}
+		</div>
+		<div class="col-md-3 column">
+			<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+			{{a.category.name}}
+		</div>
+		<div class="col-md-3 column">
+			<span class="glyphicon glyphicon-tags" aria-hidden="true"></span>
+			<span ng-repeat="t in a.tags  track by $index">
+				{{t.name}}
+			</span>
+		</div>
+	</div>
+
+	<div class="row clearfix context-pre">
+		<div class="col-md-4 column text-center">
+			<div class="imgDiv img-thumbnail">	
+				<img alt="140x140"  class=""  src="http://ibootstrap-file.b0.upaiyun.com/lorempixel.com/140/140/default.jpg" />
+			</div>
+		</div>
+		<div class="col-md-8 column context-des">
+			<p>
+				{{a.description}}
+			</p>
+		</div>
+		<p class="text-right read-more">
+			 <a class="btn" href="#"><span class="label label-primary" >阅读全文</span></a>
+		</p>
+	</div>
+</div>
